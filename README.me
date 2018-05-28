@@ -1,0 +1,32 @@
+Para copiar o projeto para a instancia ec2 execute o seguinte comando na máquina local:
+
+Local$ scp -i [chave]  Encurtador.gz ubuntu@[IP]:/home/ubuntu/ 
+
+Substitua [chave] pelo caminho onde se encontra a chave de acesso a instância.
+Substitua [IP] pelo endereço ip da instância.
+
+Conecte-se na instância EC2
+
+local$ ssh -i [chave] ubuntu@[IP]
+
+Descompacte o arquivo na instância:
+
+ec2$ tar -zxvf Encurtador.gz
+ec2$ cd Encurtador
+ec2$ chmod +x install.sh
+
+Rode o script para instalar o java.
+
+ec2$ sudo  sh install.sh 
+ 
+Para iniciar o serviço basta executar o comando:
+ec2$ service encurtador start
+
+Para parar o serviço basta executar o comando:
+
+ec2$ service encurtador stop
+
+
+Para rodar os testes e compilar uma nova versão é necessário ter o java e o maven instalados e executar o seguinte comando:
+
+local$ mvn clean install package spring-boot:repackage  
